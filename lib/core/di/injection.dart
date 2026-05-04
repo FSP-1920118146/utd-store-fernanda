@@ -12,6 +12,8 @@ import '../../features/products/data/datasources/product_remote_datasource_impl.
 import '../../features/products/domain/repositories/product_repository.dart';
 import '../../features/products/data/repositories/product_repository_impl.dart';
 
+import '../../features/products/presentation/cubit/product_cubit.dart';
+
 final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
@@ -49,6 +51,14 @@ Future<void> initDependencies() async {
           sl<ProductRemoteDataSource>(),
       nimLastDigit:
           nimLastDigit,
+    ),
+  );
+
+
+  // CUBIT
+  sl.registerFactory(
+    () => ProductCubit(
+      sl<ProductRepository>(),
     ),
   );
 }
