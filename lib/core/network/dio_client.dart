@@ -6,12 +6,57 @@ class DioClient {
 
     final dio = Dio();
 
+
     dio.interceptors.add(
-      LogInterceptor(
-        requestBody: true,
-        responseBody: true,
+
+      InterceptorsWrapper(
+
+        onRequest: (
+          options,
+          handler,
+        ) {
+
+          print(
+            'REQUEST => ${options.method} ${options.path}',
+          );
+
+          handler.next(
+            options,
+          );
+        },
+
+
+        onResponse: (
+          response,
+          handler,
+        ) {
+
+          print(
+            'RESPONSE => ${response.statusCode}',
+          );
+
+          handler.next(
+            response,
+          );
+        },
+
+
+        onError: (
+          error,
+          handler,
+        ) {
+
+          print(
+            'ERROR => ${error.message}',
+          );
+
+          handler.next(
+            error,
+          );
+        },
       ),
     );
+
 
     return dio;
   }
