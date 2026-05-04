@@ -29,11 +29,13 @@ class ProductPage extends StatelessWidget {
         body: BlocBuilder<
             ProductCubit,
             ProductState>(
+
           builder: (
             context,
             state,
           ) {
 
+            // LOADING
             if (state
                 is ProductLoading) {
 
@@ -44,6 +46,7 @@ class ProductPage extends StatelessWidget {
             }
 
 
+            // SUCCESS
             if (state
                 is ProductLoaded) {
 
@@ -60,14 +63,32 @@ class ProductPage extends StatelessWidget {
                   final product =
                       state.products[index];
 
-                  return ListTile(
+                  return Card(
 
-                    title: Text(
-                      product.title,
+                    margin:
+                        const EdgeInsets.all(
+                      8,
                     ),
 
-                    subtitle: Text(
-                      '\$${product.price}',
+                    child: ListTile(
+
+                      contentPadding:
+                          const EdgeInsets.all(
+                        12,
+                      ),
+
+                      title: Text(
+                        product.title,
+                      ),
+
+                      subtitle: Text(
+                        '\$${product.price}',
+                      ),
+
+                      trailing:
+                          const Icon(
+                        Icons.shopping_cart,
+                      ),
                     ),
                   );
                 },
@@ -75,6 +96,7 @@ class ProductPage extends StatelessWidget {
             }
 
 
+            // ERROR
             if (state
                 is ProductError) {
 
