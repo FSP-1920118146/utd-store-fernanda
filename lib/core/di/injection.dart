@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../network/dio_client.dart';
+
 import '../../features/splash/domain/services/splash_service.dart';
 import '../../features/splash/data/services/splash_service_impl.dart';
-
-import '../network/dio_client.dart';
 
 import '../../features/products/data/datasources/product_remote_datasource.dart';
 import '../../features/products/data/datasources/product_remote_datasource_impl.dart';
@@ -18,12 +18,13 @@ final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
 
-  // digit terakhir NIM = 9
   const nimLastDigit = 9;
 
 
   // SPLASH
-  sl.registerLazySingleton<SplashService>(
+  sl.registerLazySingleton<
+      SplashService>(
+
     () => SplashServiceImpl(
       nimLastDigit,
     ),
@@ -31,24 +32,34 @@ Future<void> initDependencies() async {
 
 
   // DIO
-  sl.registerLazySingleton<Dio>(
+  sl.registerLazySingleton<
+      Dio>(
+
     () => DioClient.create(),
   );
 
 
   // DATASOURCE
-  sl.registerLazySingleton<ProductRemoteDataSource>(
-    () => ProductRemoteDataSourceImpl(
+  sl.registerLazySingleton<
+      ProductRemoteDataSource>(
+
+    () =>
+        ProductRemoteDataSourceImpl(
       sl<Dio>(),
     ),
   );
 
 
   // REPOSITORY
-  sl.registerLazySingleton<ProductRepository>(
-    () => ProductRepositoryImpl(
+  sl.registerLazySingleton<
+      ProductRepository>(
+
+    () =>
+        ProductRepositoryImpl(
+
       remoteDataSource:
           sl<ProductRemoteDataSource>(),
+
       nimLastDigit:
           nimLastDigit,
     ),
@@ -56,7 +67,9 @@ Future<void> initDependencies() async {
 
 
   // CUBIT
-  sl.registerFactory(
+  sl.registerFactory<
+      ProductCubit>(
+
     () => ProductCubit(
       sl<ProductRepository>(),
     ),

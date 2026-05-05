@@ -85,9 +85,24 @@ class ProductPage extends StatelessWidget {
                         '\$${product.price}',
                       ),
 
-                      trailing:
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+
+                          IconButton(
+                            onPressed: () {
+
+                            },
+                            icon: const Icon(
+                              Icons.bookmark_border,
+                            ),
+                          ),
+
                           const Icon(
-                        Icons.shopping_cart,
+                            Icons.shopping_cart,
+                          ),
+
+                        ],
                       ),
                     ),
                   );
