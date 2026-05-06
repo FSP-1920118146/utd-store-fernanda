@@ -16,15 +16,15 @@ import '../../features/products/presentation/cubit/product_cubit.dart';
 
 final sl = GetIt.instance;
 
-Future<void> initDependencies() async {
+Future<void> initDependencies({
+  bool webMode = false,
+}) async {
 
   const nimLastDigit = 9;
 
 
   // SPLASH
-  sl.registerLazySingleton<
-      SplashService>(
-
+  sl.registerLazySingleton<SplashService>(
     () => SplashServiceImpl(
       nimLastDigit,
     ),
@@ -32,31 +32,22 @@ Future<void> initDependencies() async {
 
 
   // DIO
-  sl.registerLazySingleton<
-      Dio>(
-
+  sl.registerLazySingleton<Dio>(
     () => DioClient.create(),
   );
 
 
   // DATASOURCE
-  sl.registerLazySingleton<
-      ProductRemoteDataSource>(
-
-    () =>
-        ProductRemoteDataSourceImpl(
+  sl.registerLazySingleton<ProductRemoteDataSource>(
+    () => ProductRemoteDataSourceImpl(
       sl<Dio>(),
     ),
   );
 
 
   // REPOSITORY
-  sl.registerLazySingleton<
-      ProductRepository>(
-
-    () =>
-        ProductRepositoryImpl(
-
+  sl.registerLazySingleton<ProductRepository>(
+    () => ProductRepositoryImpl(
       remoteDataSource:
           sl<ProductRemoteDataSource>(),
 
@@ -67,9 +58,7 @@ Future<void> initDependencies() async {
 
 
   // CUBIT
-  sl.registerFactory<
-      ProductCubit>(
-
+  sl.registerFactory(
     () => ProductCubit(
       sl<ProductRepository>(),
     ),

@@ -86,13 +86,18 @@ class ProductPage extends StatelessWidget {
                       ),
 
                       trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize:
+                            MainAxisSize.min,
+
                         children: [
 
                           IconButton(
-                            onPressed: () {
 
+                            onPressed: () async {
+
+            
                             },
+
                             icon: const Icon(
                               Icons.bookmark_border,
                             ),

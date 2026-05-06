@@ -11,8 +11,7 @@ class BookmarkRepository {
   );
 
 
-  Future<void> save({
-
+  Future<void> saveBookmark({
     required String title,
     required double price,
   }) async {
@@ -23,14 +22,12 @@ class BookmarkRepository {
           ..title = title
           ..price = price;
 
+    await isar.writeTxn(() async {
 
-    await isar.writeTxn(
-      () async {
+      await isar.bookmarkModels.put(
+        bookmark,
+      );
 
-        await isar.bookmarkModels.put(
-          bookmark,
-        );
-      },
-    );
+    });
   }
 }
