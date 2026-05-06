@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/di/injection.dart';
 
 import '../cubit/product_cubit.dart';
 import '../cubit/product_state.dart';
 
-class ProductPage extends StatelessWidget {
-  const ProductPage({super.key});
+
+class ProductPage
+    extends StatelessWidget {
+
+  const ProductPage({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
 
     return BlocProvider(
 
@@ -21,9 +29,27 @@ class ProductPage extends StatelessWidget {
       child: Scaffold(
 
         appBar: AppBar(
+
           title: const Text(
             'UTD Store',
           ),
+
+          actions: [
+
+            IconButton(
+
+              onPressed: () {
+
+                context.go(
+                  '/crypto',
+                );
+              },
+
+              icon: const Icon(
+                Icons.currency_bitcoin,
+              ),
+            ),
+          ],
         ),
 
         body: BlocBuilder<
@@ -85,29 +111,9 @@ class ProductPage extends StatelessWidget {
                         '\$${product.price}',
                       ),
 
-                      trailing: Row(
-                        mainAxisSize:
-                            MainAxisSize.min,
-
-                        children: [
-
-                          IconButton(
-
-                            onPressed: () async {
-
-            
-                            },
-
-                            icon: const Icon(
-                              Icons.bookmark_border,
-                            ),
-                          ),
-
+                      trailing:
                           const Icon(
-                            Icons.shopping_cart,
-                          ),
-
-                        ],
+                        Icons.shopping_cart,
                       ),
                     ),
                   );
