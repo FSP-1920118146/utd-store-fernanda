@@ -6,6 +6,10 @@ import '../../features/products/presentation/pages/product_page.dart';
 
 import '../../features/crypto/presentation/pages/crypto_page.dart';
 
+import '../../features/isolate/presentation/pages/isolate_page.dart';
+
+import '../../features/battery/presentation/pages/battery_page.dart';
+
 
 final appRouter = GoRouter(
 
@@ -46,5 +50,28 @@ final appRouter = GoRouter(
           const CryptoPage(),
     ),
 
+
+    GoRoute(
+
+      path: '/isolate',
+
+      builder: (
+        context,
+        state,
+      ) =>
+          const IsolatePage(),
+    ),
+
+
+    GoRoute(
+
+      path: '/battery',
+
+      builder: (
+        context,
+        state,
+      ) =>
+          const BatteryPage(),
+    ),
   ],
 );

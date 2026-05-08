@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'core/di/injection.dart';
 import 'core/router/app_router.dart';
 
+
 void main() async {
 
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding
+      .ensureInitialized();
 
   await initDependencies(
     webMode: kIsWeb,
@@ -17,7 +19,9 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+
+class MyApp
+    extends StatelessWidget {
 
   const MyApp({
     super.key,
@@ -32,6 +36,49 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner:
           false,
+
+
+      theme: ThemeData(
+
+        scaffoldBackgroundColor:
+            const Color(
+          0xFFF8F7F3,
+        ),
+
+
+        colorScheme:
+            ColorScheme.fromSeed(
+
+          seedColor:
+              const Color(
+            0xFF8FAF9D,
+          ),
+        ),
+
+
+        appBarTheme:
+            const AppBarTheme(
+
+          backgroundColor:
+              Color(
+            0xFF8FAF9D,
+          ),
+
+          foregroundColor:
+              Colors.white,
+
+          centerTitle:
+              true,
+        ),
+
+
+        cardTheme:
+            const CardThemeData(
+
+        elevation: 3,
+),
+      ),
+
 
       routerConfig:
           appRouter,

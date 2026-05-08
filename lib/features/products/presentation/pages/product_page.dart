@@ -15,6 +15,7 @@ class ProductPage
     super.key,
   });
 
+
   @override
   Widget build(
     BuildContext context,
@@ -36,6 +37,7 @@ class ProductPage
 
           actions: [
 
+            // CRYPTO
             IconButton(
 
               onPressed: () {
@@ -49,8 +51,41 @@ class ProductPage
                 Icons.currency_bitcoin,
               ),
             ),
+
+
+            // ISOLATE
+            IconButton(
+
+              onPressed: () {
+
+                context.go(
+                  '/isolate',
+                );
+              },
+
+              icon: const Icon(
+                Icons.science,
+              ),
+            ),
+
+
+            // BATTERY
+            IconButton(
+
+              onPressed: () {
+
+                context.go(
+                  '/battery',
+                );
+              },
+
+              icon: const Icon(
+                Icons.battery_full,
+              ),
+            ),
           ],
         ),
+
 
         body: BlocBuilder<
             ProductCubit,
@@ -61,11 +96,13 @@ class ProductPage
             state,
           ) {
 
+
             // LOADING
             if (state
                 is ProductLoading) {
 
               return const Center(
+
                 child:
                     CircularProgressIndicator(),
               );
@@ -89,6 +126,7 @@ class ProductPage
                   final product =
                       state.products[index];
 
+
                   return Card(
 
                     margin:
@@ -103,13 +141,63 @@ class ProductPage
                         12,
                       ),
 
+
+                      leading:
+                          Image.network(
+
+                        product.image,
+
+                        width: 60,
+
+                        errorBuilder: (
+
+                          context,
+                          error,
+                          stackTrace,
+
+                        ) {
+
+                          return const Icon(
+                            Icons.image,
+                          );
+                        },
+                      ),
+
+
                       title: Text(
                         product.title,
                       ),
 
-                      subtitle: Text(
-                        '\$${product.price}',
+
+                      subtitle: Column(
+
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
+
+                        children: [
+
+                          Text(
+                            product.category,
+                          ),
+
+                          const SizedBox(
+                            height: 4,
+                          ),
+
+                          Text(
+
+                            '\$${product.price}',
+
+                            style:
+                                const TextStyle(
+
+                              fontWeight:
+                                  FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
+
 
                       trailing:
                           const Icon(
@@ -127,6 +215,7 @@ class ProductPage
                 is ProductError) {
 
               return Center(
+
                 child: Text(
                   state.message,
                 ),
